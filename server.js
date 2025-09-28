@@ -6,12 +6,11 @@ const rateLimit = require('express-rate-limit');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, 'config.env') });
 
-
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware de seguridad
+app.set('trust proxy', 1); // necesario en Render, Heroku, Netlify functions, etc.
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
